@@ -51,6 +51,21 @@ app.delete("/api/delete/:movieName", (req, res) => {
     });
 });
 
+
+// Update method
+app.put("/api/update", (req, res) => {
+    const name = req.body.movieName;
+    const review = req.body.movieReview;
+
+    const sqlUpdate = "UPDATE movie_reviews SET movieReview = ? WHERE movieName = ?";
+
+    // los atributos del array se ponen en orden segun la query. En la query se usa primero la review y luego el name
+    db.query(sqlUpdate, [review, name], (err, result) => {
+        if (err) console.log(err);
+    });
+});
+
+
 app.listen(3001, () => {
     console.log("running on port 3001");
 });
