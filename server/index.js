@@ -16,6 +16,21 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+// Register method
+app.post("/register", (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    db.query(
+        "INSERT INTO users (username, password) VALUES (?,?)",
+        [username, password],
+        (err, result) => {
+            console.log(err);
+        }
+    );
+});
+
+
 // List method
 app.get("/api/get", (req, res) => {
 
